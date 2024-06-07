@@ -4,7 +4,7 @@ namespace Heroes.Service;
 
 public class BattleService : IBattleService
 {
-    private Random _random = new Random();
+    private readonly Random _random = new Random();
     
     public string Battle(Hero attacker, Hero defender)
     {
@@ -22,7 +22,7 @@ public class BattleService : IBattleService
         if (defender is Archer)
         {
             defender.Health = 0;
-            return $"{attacker.Type} => {defender.Type}. {defender.Type} meghalt.";
+            return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}): {defender.Name} meghalt.";
         }
         
         if (defender is Cavalry)
@@ -30,18 +30,18 @@ public class BattleService : IBattleService
             if (_random.NextDouble() <= 0.4)
             {
                 defender.Health = 0;
-                return $"{attacker.Type} => {defender.Type}. {defender.Type} meghalt.";
+                return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}): {defender.Name} meghalt.";
             }
             else
             {
-                return $"{attacker.Type} => {defender.Type}. {defender.Type} jól védekezett.";
+                return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}): {defender.Name} jól védekezett.";
             }
         }
         
         if (defender is Swordsman)
         {
             defender.Health = 0;
-            return $"{attacker.Type} => {defender.Type}. {defender.Type} meghalt.";
+            return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}): {defender.Name} meghalt.";
         }
         
         return "Érvénytelen támadás!";
@@ -52,7 +52,7 @@ public class BattleService : IBattleService
         if (defender is Archer or Swordsman or Cavalry)
         {
             defender.Health = 0;
-            return $"{attacker.Type} => {defender.Type}. {defender.Type} meghalt.";
+            return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}): {defender.Name} meghalt.";
         }
         
         return "Érvénytelen támadás!";
@@ -63,12 +63,12 @@ public class BattleService : IBattleService
         if (defender is Archer or Swordsman)
         {
             defender.Health = 0;
-            return $"{attacker.Type} => {defender.Type}. {defender.Type} meghalt.";
+            return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}): {defender.Name} meghalt.";
         }
         
         if (defender is Cavalry)
         {
-            return $"{attacker.Type} => {defender.Type}. Nem történt semmi.";
+            return $"{attacker.Name}({attacker.Type}) => {defender.Name}({defender.Type}). {defender.Name} lóháton gyorsabb volt.";
         }
         
         return "Érvénytelen támadás!";
