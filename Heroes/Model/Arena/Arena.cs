@@ -42,7 +42,7 @@ public class Arena
         attacker.ReduceHealth();
         defender.ReduceHealth();
 
-        battleResult += $"Életerők a csata után: {attacker.Name} <{attacker.Health}>, {defender.Name} <{defender.Health}>";
+        battleResult += $" Életerők a csata után: {attacker.Name} <{attacker.Health}>, {defender.Name} <{defender.Health}>";
 
         foreach (var hero in Heroes.Where(h => h != attacker && h != defender))
         {

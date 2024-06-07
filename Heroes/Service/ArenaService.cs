@@ -57,7 +57,7 @@ public class ArenaService : IArenaService
         }
 
         history.Add(arena.Heroes.Count == 1
-            ? $"{arena.Heroes.First().Name}<{arena.Heroes.First().Name}> dicsőséges győzelmet aratott!"
+            ? $"{arena.Heroes.First().Name}<{arena.Heroes.First().Health}> dicsőséges győzelmet aratott!"
             : "Az utolsó csatát senki nem élte túl.");
 
         return history;
