@@ -53,11 +53,13 @@ public class ArenaService : IArenaService
         while (!arena.HasWinner())
         {
             var result = arena.BattleRound(battleService);
-            history.Add($"{history.Count+1}. forduló: {result}");
+            history.Add($"{history.Count + 1}. forduló: {result}");
         }
 
-        history.Add($"{arena.Heroes.First().Name} dicsőséges győzelmet aratott!");
-        
+        history.Add(arena.Heroes.Count == 1
+            ? $"{arena.Heroes.First().Name}<{arena.Heroes.First().Name}> dicsőséges győzelmet aratott!"
+            : "Az utolsó csatát senki nem élte túl.");
+
         return history;
     }
 }
