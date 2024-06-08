@@ -8,12 +8,10 @@ namespace Heroes.Controller;
 public class ArenaController : ControllerBase
 {
     private readonly IArenaService _arenaService;
-    private readonly IBattleService _battleService;
 
-    public ArenaController(IArenaService arenaService, IBattleService battleService)
+    public ArenaController(IArenaService arenaService)
     {
         _arenaService = arenaService;
-        _battleService = battleService;
     }
 
     [HttpPost("generate")]
@@ -25,6 +23,6 @@ public class ArenaController : ControllerBase
     [HttpPost("battle/{arenaId}")]
     public IActionResult Battle(Guid arenaId)
     {
-        return Ok(_arenaService.BattleInArena(arenaId, _battleService));
+        return Ok(_arenaService.BattleInArena(arenaId));
     }
 }

@@ -3,5 +3,5 @@
 public interface IArenaService
 {
     Guid GenerateHeroes(int numberOfHeroes);
-    List<string> BattleInArena(Guid arenaId, IBattleService battleService);
+    List<string> BattleInArena(Guid arenaId);
 }

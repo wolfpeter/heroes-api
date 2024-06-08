@@ -6,14 +6,20 @@ namespace Heroes.Service;
 
 public class ArenaService : IArenaService
 {
+    private readonly IBattleService _battleService;
     private readonly Dictionary<Guid, Arena> _arenas = new();
     private readonly Random _random = new();
 
     private readonly int _numberOfHeroTypes = Enum.GetNames(typeof(HeroType)).Length;
 
+    public ArenaService(IBattleService battleService)
+    {
+        _battleService = battleService;
+    }
+
     public Guid GenerateHeroes(int numberOfHeroes)
     {
-        var arena = new Arena();
+        var arena = new Arena(_battleService);
         for (int i = 0; i < numberOfHeroes; i++)
         {
             var heroType = _random.Next(_numberOfHeroTypes);
@@ -31,7 +37,7 @@ public class ArenaService : IArenaService
                     hero = new Swordsman();
                     break;
                 default:
-                    throw new InvalidOperationException("Érvénytelen hős típus!");
+                    throw new InvalidOperationException("Invalid hero type!");
             }
             
             arena.AddHero(hero);
@@ -41,7 +47,7 @@ public class ArenaService : IArenaService
         return arena.Id;
     }
 
-    public List<string> BattleInArena(Guid arenaId, IBattleService battleService)
+    public List<string> BattleInArena(Guid arenaId)
     {
         if (!_arenas.TryGetValue(arenaId, out var arena))
         {
@@ -52,7 +58,7 @@ public class ArenaService : IArenaService
         
         while (!arena.HasWinner())
         {
-            var result = arena.BattleRound(battleService);
+            var result = arena.BattleRound();
             history.Add($"{history.Count + 1}. forduló: {result}");
         }
 

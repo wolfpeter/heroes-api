@@ -8,10 +8,12 @@ public class Arena
     public Guid Id { get; set; }
     public List<Hero> Heroes { get; set; }
     
+    private readonly IBattleService _battleService;
     private readonly Random _random = new Random();
 
-    public Arena()
+    public Arena(IBattleService battleService)
     {
+        _battleService = battleService;
         Id = Guid.NewGuid();
         Heroes = new List<Hero>();
     }
@@ -26,7 +28,7 @@ public class Arena
         return Heroes[_random.Next(Heroes.Count)];
     }
 
-    public string BattleRound(IBattleService battleService)
+    public string BattleRound()
     {
         var attacker = GetRandomHero();
         var defender = GetRandomHero();
@@ -37,7 +39,7 @@ public class Arena
             defender = GetRandomHero();
         }
 
-        var battleResult = battleService.Battle(attacker, defender);
+        var battleResult = _battleService.Battle(attacker, defender);
 
         attacker.ReduceHealth();
         defender.ReduceHealth();
