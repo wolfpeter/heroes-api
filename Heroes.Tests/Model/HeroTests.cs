@@ -15,4 +15,24 @@ public class HeroTests
         Assert.AreEqual(HeroType.Archer, archer.Type);
         Assert.AreEqual(100, archer.Health);
     }
+    
+    [TestMethod]
+    public void Hero_Initialization_Cavalry()
+    {
+        var calvary = new Cavalry();
+        
+        Assert.IsTrue(!string.IsNullOrEmpty(calvary.Name));
+        Assert.AreEqual(HeroType.Cavalry, calvary.Type);
+        Assert.AreEqual(150, calvary.Health);
+    }
+    
+    [TestMethod]
+    public void Hero_Initialization_Swordsman()
+    {
+        var swordsman = new Swordsman();
+        
+        Assert.IsTrue(!string.IsNullOrEmpty(swordsman.Name));
+        Assert.AreEqual(HeroType.Swordsman, swordsman.Type);
+        Assert.AreEqual(120, swordsman.Health);
+    }
 }

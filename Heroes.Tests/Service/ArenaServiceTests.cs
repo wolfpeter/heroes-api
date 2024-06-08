@@ -25,4 +25,27 @@ public class ArenaServiceTests
 
         Assert.AreEqual(1, arena.Heroes.Count);
     }
+
+    [TestMethod]
+    public void Arena_Battle()
+    {
+        var arena = new Arena(_battleService);
+
+        var cavalry = new Cavalry();
+        var archer = new Archer();
+        var swordsman = new Swordsman();
+        
+        arena.AddHero(cavalry);
+        arena.AddHero(archer);
+        arena.AddHero(swordsman);
+
+        arena.BattleRound();
+        
+        var heroes = new List<Hero> { cavalry, archer, swordsman };
+        int lessHealthCount = heroes.Count(hero => hero.Health < hero.InitialHealth);
+        int equalHealthCount = heroes.Count(hero => hero.Health == hero.InitialHealth);
+
+        Assert.AreEqual(2, lessHealthCount);
+        Assert.AreEqual(1, equalHealthCount);
+    }
 }
